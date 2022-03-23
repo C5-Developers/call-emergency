@@ -13,21 +13,63 @@ app.get('/', (req, res)=>{
     res.sendFile(__dirname + '/public/index.html');
 });
 
-let usuariosConectados = [];
+let connectedPeers = [];
 
 io.on('connection', (socket)=> {
-    usuariosConectados.push(socket.id);
-    console.log(usuariosConectados);
+    connectedPeers.push(socket.id);
+    // console.log(connectedPeers);
+
+    socket.on('pre-offer', (data)=> {
+        console.log('pre-offer-came');
+        const { calleePersonalCode, callType } = data;
+        console.log(calleePersonalCode);
+        console.log(connectedPeers);
+        const connectedPeer = connectedPeers.find((peerSocketId) => {
+           return peerSocketId === calleePersonalCode;
+        });
+        
+        console.log(connectedPeer);
+
+        if (connectedPeer) {
+            const data = {
+                callerSocketId: socket.id,
+                callType,
+            };
+
+            io.to(calleePersonalCode).emit('pre-offer', data);
+        }else{
+            const data = {
+                preOfferAnswer: 'CALLEE_NOT_FOUND',
+            }
+            io.to(socket.id).emit('pre-offer-answer',data);
+        }
+    })
+
+    socket.on('pre-offer-answer',(data) => {
+        console.log('pre offer answer came');
+        console.log(data);
+
+        const {callerSocketId} = data;
+
+        const connectedPeer = connectedPeers.find((peerSocketId) => {
+            return peerSocketId === callerSocketId;
+         });
+
+         if (connectedPeer){
+             io.to(data.callerSocketId).emit('pre-offer-answer',data);
+         }
+    })
+
 
     socket.on('disconnect', ()=> { 
-        console.log("Usuario Desconectado"+ socket.id);
+        // console.log("Usuario Desconectado"+ socket.id);
 
-        const newUsuarioConectado = usuariosConectados.filter((usuarioSocketId)=>{
+        const newConnectedPeers= connectedPeers.filter((usuarioSocketId)=>{
            return usuarioSocketId !== socket.io
         });
 
-        usuariosConectados = newUsuarioConectado;
-        console.log(usuariosConectados);
+        connectedPeers = newConnectedPeers;
+        // console.log(connectedPeers);
 
     });
 });

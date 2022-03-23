@@ -7,22 +7,22 @@
         <div class='main_container'>
         <div class='dashboard_container'>
             <div class='logo_container'>
-                <img src='./utils/images/logo.png'></img>
+                <img src='./utils/images/img-personal/logo-emg.png' width="140px"></img>
             </div>
             <div>
                 <div class='description_container'>
                     <p class='description_container_paragraph'>
-                        Talk with other user by passing his personal code or talk with strangers!
+                        Habla con otro usuario compartiendo tu codigo personal o habla con desconocidos!
                     </p>
                 </div>
                 <div class='personal_code_container'>
                     <div class='personal_code_title_container'>
                         <p class='personal_code_title_paragraph'>
-                            Your personal code
+                            Tu codigo personal
                         </p>
                     </div>
                     <div class="personal_code_value_container">
-                        <p class='personal_code_value_paragraph' id='personal_code_paragraph'>DDDDDD</p>
+                        <p class='personal_code_value_paragraph' id='personal_code_paragraph'>----</p>
                         <button class='personal_code_copy_button' id='personal_code_copy_button'>
                             <img src='./utils/images/copyButton.png'></img>
                         </button>
@@ -30,7 +30,7 @@
                 </div>
                 </div>
                 <div class='personal_code_connecting_container'>
-                    <p class='personal_code_connecting_paragraph'>Personal Code</p>
+                    <p class='personal_code_connecting_paragraph'>Codigo del usuario</p>
                     <div class='personal_code_connecting_input_container'>
                         <input class='personal_code_input' id='personal_code_input'></input>
                     </div>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class='stranger_connecting_container'>
-                    <p class='stranger_title_container'>Stranger</p>
+                    <p class='stranger_title_container'>Desconocido</p>
                     <div class='stranger_buttons_container'>
                         <button class='connecting_button' id='stranger_chat_button'>
                             <img src='/utils/images/chatButton.png' class='connecting_buttons_image'></img>
@@ -58,14 +58,14 @@
                     <div class='checkbox_connection' id='allow_strangers_checkbox'>
                         <img id='allow_strangers_checkbox_image' class='' src='./utils/images/check.png'></img>
                     </div>
-                    <p class='checkbox_container_paragraph'>Allow connection from strangers</p>
+                    <p class='checkbox_container_paragraph'>Permite la conexión con desconocidos</p>
                 </div>
                 <div class='dashboard_blur display_none' id='dashboard_blur'></div>
             </div>
         <div class='call_container'>
             <div class='videos_container'>
                 <div id='video_placeholder' class='videos_placeholder'>
-                    <img src='./utils/images/logo.png'></img>
+                    <img src='./utils/images/img-personal/logo-emg.png' width="140px"></img>
                 </div>
                 <video class='remote_video display_none' autoplay id='remote_video'></video>
                 <div class='local_video_container'>
@@ -101,7 +101,7 @@
                         <img src='./utils/images/resume.png'></img>
                     </button>
                     <button id='stop_recording_button'>
-                        Stop recording
+                        Dejar de grabar
                     </button>
                 </div>
             </div>
@@ -114,9 +114,18 @@
                     <img class='send_message_button_image' src='./utils/images/sendMessageButton.png'></image>
                 </button>
             </div>
-        </div>    
+        </div> 
+
+        <div id="dialog"></div>
+        
         </div>
         <script src='/socket.io/socket.io.js'></script>
+        <script src='./js/elements.js' type="module"></script>
+        <script src='./js/constants.js' type="module"></script>
+        <script src='./js/ui.js' type='module'></script>
+        <script src='./js/wss.js' type='module'></script>
+        <script src='./js/store.js' type='module'></script>
+        <script src='./js/WebRTCHandler.js' type='module'></script>
         <script src='./js/main.js' type='module'></script>
     </body>
 </html>
