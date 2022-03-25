@@ -58,6 +58,18 @@ io.on('connection', (socket)=> {
          if (connectedPeer){
              io.to(data.callerSocketId).emit('pre-offer-answer',data);
          }
+    });
+
+    socket.on('webRTC-signaling', (data)=>{
+        const { connectedUserSocketId } = data;
+
+        const connectedPeer = connectedPeers.find((peerSocketId) => {
+            return peerSocketId === connectedUserSocketId;
+         });
+
+         if(connectedPeer){
+             io.to(connectedUserSocketId).emit('webRTC-signaling',data);
+         }
     })
 
 

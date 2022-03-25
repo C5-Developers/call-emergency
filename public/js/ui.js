@@ -6,6 +6,19 @@ export const updatePersonalCode = (personalCode) => {
     personalCodeParagraph.innerHTML = personalCode;
 }
 
+export const updateLocalVideo = (stream) => {
+    const localVideo = document.getElementById('local_video');
+    localVideo.srcObject = stream;
+    localVideo.addEventListener('loadedmetadata', ()=>{
+        localVideo.play()
+    })
+}
+
+export const updateRemoteVideo = (stream) => {
+    const remoteVideo = document.getElementById('remote_video');
+    remoteVideo.srcObject = stream;
+}
+
 export const showIncomingCallDialog = (callType, acceptCallHandler, rejectCallHandler) => {
     
         const callTypeInfo = (callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : "Video");
@@ -112,7 +125,25 @@ const showVideoCallElements = () => {
     disableDashboard();
 }
 
+const micOnImgSrc = './utils/images/mic.png';
+const micOffImgSrc = './utils/images/micOff.png'
+
+export const updateMicButton = (micActive) => {
+    const micButtonImage = document.getElementById('mic_button_image');
+    micButtonImage.src = micActive ? micOffImgSrc : micOnImgSrc;
+}
+
+const cameraOnImgSrc = './utils/images/camera.png';
+const cameraOffImgSrc = './utils/images/cameraOff.png';
+
+export const updateCameraButton = (cameraActive) => {
+    const cameraButtonImage = document.getElementById('camera_button_image');
+    cameraButtonImage.src = cameraActive ? cameraOffImgSrc : cameraOnImgSrc;
+}
+
 //ui helper functions
+
+
 
 const enableDashboard = () => {
     const dashboardBlocker = document.getElementById('dashboard_blur');
