@@ -4,7 +4,7 @@ import * as ui from './ui.js';
 import * as store from './store.js';
 
 let connectedUserDetails;
-let peerConection
+let peerConection;
 
 const defaultconstraints= {
     audio : true,
@@ -12,7 +12,7 @@ const defaultconstraints= {
 }
 
 const configuration = {
-    iceServer: [
+    iceServers: [
         {
             urls: 'stun:stun.l.google.com:13902'
         }
@@ -67,7 +67,7 @@ const createPeerConnection = () => {
         const localStream = store.getState().localStream;
 
         for(const track of localStream.getTracks()){
-            peerConection.addTrack(track.localStream);
+            peerConection.addTrack(track, localStream);
         }
     }
 }
@@ -158,9 +158,9 @@ export const handlePreOfferAnswer = (data) => {
 
 };
 
-const sendWebRTCOffer = () => {
+const sendWebRTCOffer = async () => {
     const offer = await peerConection.createOffer();
-    await peerConection.seLocalDescription(offer);
+    await peerConection.setLocalDescription(offer);
     wss.sendDataUsingWebRTCSignaling({
         connectedUserSocketId: connectedUserDetails.socketId,
         type : constants.webRTCSignaling.OFFER,
@@ -171,7 +171,7 @@ const sendWebRTCOffer = () => {
 export const handleWebRTCOffer = async (data) => {
     await peerConection.setRemoteDescription(data.offer);
     const answer = await peerConection.createAnswer();
-    await peerConection.seLocalDescription(answer);
+    await peerConection.setLocalDescription(answer);
     wss.sendDataUsingWebRTCSignaling({
         connectedUserSocketId : connectedUserDetails.socketId,
         type: constants.webRTCSignaling.ANSWER,
@@ -196,7 +196,7 @@ export const handleWebRTCCandidate = async (data) => {
 
 let screenSharingStream;
 
-export const switchBetweenCameraAndScreenSharing = (screenSharingActive) => {
+export const switchBetweenCameraAndScreenSharing = async (screenSharingActive) => {
     if (screenSharingActive) {
         const localStream = store.getState().localStream;
         const senders = peerConection.getSenders();
@@ -226,7 +226,7 @@ export const switchBetweenCameraAndScreenSharing = (screenSharingActive) => {
             const senders = peerConection.getSenders();
 
             const sender = senders.find((sender) => {
-                return sender.track.kind === screenSharingStream.getVideoTrack()[0].kind;
+                return sender.track.kind === screenSharingStream.getVideoTracks()[0].kind;
             })
 
             if (sender){

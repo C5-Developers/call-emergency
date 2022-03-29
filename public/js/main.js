@@ -55,8 +55,8 @@ micButton.addEventListener('click',()=>{
 const cameraButton = document.getElementById('camera_button');
 cameraButton.addEventListener('click', ()=>{
     const localStream = store.getState().localStream;
-    const cameraEnabled = localStream.getVideoTrack()[0].enabled;
-    localStream.getVideoTrack()[0].enabled = !cameraEnabled;
+    const cameraEnabled = localStream.getVideoTracks()[0].enabled;
+    localStream.getVideoTracks()[0].enabled = !cameraEnabled;
     ui.updateCameraButton(cameraEnabled);
 });
 

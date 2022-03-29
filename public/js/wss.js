@@ -48,6 +48,6 @@ export const sendPreOfferAnswer = (data) => {
     socketIO.emit('pre-offer-answer', data);
 }
 
-export const sendDataUsingWebRTCSignaling = ()=> {
+export const sendDataUsingWebRTCSignaling = (data)=> {
     socketIO.emit('webRTC-signaling',data)
 }
