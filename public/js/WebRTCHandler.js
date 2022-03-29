@@ -202,7 +202,7 @@ export const switchBetweenCameraAndScreenSharing = async (screenSharingActive) =
         const senders = peerConection.getSenders();
 
         const sender = senders.find((sender) => {
-            return sender.track.kind === localStream.getVideoTrack()[0].kind;
+            return sender.track.kind === localStream.getVideoTracks()[0].kind;
         })
 
         if (sender){
