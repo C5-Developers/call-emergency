@@ -6,6 +6,9 @@ services:
       target: dev
     volumes:
       - .:/src
+    mem_limit: 512m
+    mem_reservation: 128M
+    cpus: 0.5
     command: npm run start
     ports:
       - "3000:3000"
