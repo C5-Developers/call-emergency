@@ -1,8 +1,8 @@
-var fs = require('fs');
-var https = require('https');
-var privateKey  = fs.readFileSync('/etc/ssl/private/50-116-6-25.ip.linodeusercontent.com.key', 'utf8');
-var certificate = fs.readFileSync('/etc/ssl/certs/50-116-6-25.ip.linodeusercontent.com.crt', 'utf8');
-var credentials = {key: privateKey, cert: certificate};
+// var fs = require('fs');
+// var https = require('https');
+// var privateKey  = fs.readFileSync('/etc/ssl/private/50-116-6-25.ip.linodeusercontent.com.key', 'utf8');
+// var certificate = fs.readFileSync('/etc/ssl/certs/50-116-6-25.ip.linodeusercontent.com.crt', 'utf8');
+// var credentials = {key: privateKey, cert: certificate};
 
 const express = require('express');
 const http = require("http");
@@ -10,7 +10,7 @@ const http = require("http");
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-const server = https.createServer(credentials,app);
+const server = http.createServer(app);
 const io = require('socket.io')(server);
 
 app.use(express.static("public"));
