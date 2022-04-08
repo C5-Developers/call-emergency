@@ -33,16 +33,16 @@ button {
   }
   
   .main_container {
-    width: 100%;
-    height: 100%;
-    display: flex;
+    /* width: 100%;
+    height: 100%; */
+    /* display: flex; */
     justify-content: center;
     align-items: center;
   }
   
   .dashboard_container {
-    width: 25%;
-    height: 100%;
+    /* width: 25%;
+    height: 100%; */
     background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
     display: flex;
     flex-direction: column;
@@ -56,38 +56,31 @@ button {
   }
   
   .messenger_container {
-    width: 25%;
-    height: 100%;
+   
     background: #f4f9fd;
     display: flex;
     flex-direction: column;
   }
   
-  .logo_container {
-    margin-left: 40px;
-    width: 180px;
-    height: 120px;
-  }
   
   .description_container {
     margin: 0 40px;
   }
   
   .description_container_paragraph {
-    font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
     color: white;
   }
   
   .personal_code_container {
-    height: 110px;
+    height: 30%;
     margin: 0 40px;
     background: rgba(196, 196, 196, 0.2);
-    background-filter: blur(80px);
+    /* background-filter: blur(80px); */
     border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-evenly; */
   }
   
   .personal_code_title_container {
@@ -95,7 +88,7 @@ button {
   }
   
   .personal_code_title_paragraph {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
   }
   
