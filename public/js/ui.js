@@ -12,6 +12,14 @@ export const updateLocalVideo = (stream) => {
     localVideo.addEventListener('loadedmetadata', ()=>{
         localVideo.play()
     })
+};
+
+export const showVideoCallButtons = () => {
+    const personalCodeVideoButton = document.getElementById('personal_code_video_button');
+    const strangerVideoButton = document.getElementById("stranger_video_button");
+
+    showElement(personalCodeVideoButton);
+    showElement(strangerVideoButton);
 }
 
 export const updateRemoteVideo = (stream) => {
@@ -43,6 +51,22 @@ export const showCallingDialog = (rejectCallHandler) => {
         dialog.remove();
     });
     dialog.appendChild(callingDialog);
+}
+
+export const showNoStrangerAvailableDialog = () =>{
+    const infoDialog = elements.getInfoDialog(
+        "No Stranger available",
+        "Please try again later"
+    );
+
+    if(infoDialog){
+        const dialog = document.getElementById("dialog");
+        dialog.appendChild(infoDialog);
+
+        setTimeout(() => {
+            removeAllDialogs();
+        }, [4000]);
+    }
 }
 
 export const showInfoDialog = (preOfferAnswer) => {
@@ -87,11 +111,11 @@ export const removeAllDialogs = () => {
 }
 
 export const showCallElements = (callType) => {
-    if(callType === constants.callType.CHAT_PERSONAL_CODE){
+    if(callType === constants.callType.CHAT_PERSONAL_CODE || callType === constants.callType.CHAT_STRANGER){
         showChatCallElements();
     }
 
-    if(callType === constants.callType.VIDEO_PERSONAL_CODE){
+    if(callType === constants.callType.VIDEO_PERSONAL_CODE || callType === constants.callType.VIDEO_STRANGER){
         showVideoCallElements();
     }
 };
@@ -153,7 +177,7 @@ export const appendMessage = (message, right = false) => {
 export const clearMessager = () => {
 
     const messageContainer = document.getElementById('messages_container');
-    messagesContainer.querySelectorAll('*').forEach((n) => n.remove() );
+    messageContainer.querySelectorAll('*').forEach((n) => n.remove() );
 
 }
 // recording
@@ -188,8 +212,48 @@ export const switchRecordingButtons = (switchForResumeButton = false) =>{
         showElement(pauseButton);
     }
 }
+// changing status of checkbox
+export const updateStrangerCheckbox = (allowConnections) => {
+    const checkboxCheckImg = document.getElementById('allow_strangers_checkbox_image');
+    allowConnections ? showElement(checkboxCheckImg) : hideElement(checkboxCheckImg);
+}
+
 
 //ui helper functions
+
+export const updateUIAfterHangUp = (callType) => {
+    enableDashboard();
+
+    // hide the call buttons
+
+    if (callType === constants.callType.VIDEO_PERSONAL_CODE ||
+        callType === constants.callType.VIDEO_STRANGER){
+            const callButtons = document.getElementById('call_buttons');
+            hideElement(callButtons);
+        }else{
+            const chatCallButtons = document.getElementById('finish_chat_button_container');
+            hideElement(chatCallButtons);
+        }
+
+        const newMessageInput = document.getElementById('new_message');
+        hideElement(newMessageInput);
+        clearMessager();
+
+        updateMicButton(false);
+        updateCameraButton(false);
+
+        //hide remote video and show placeholder
+
+        const remoteVideo = document.getElementById('remote_video');
+        hideElement(remoteVideo);
+
+        const placeholder = document.getElementById('video_placeholder');
+        showElement(placeholder);
+
+
+
+        removeAllDialogs();
+}
 
 const enableDashboard = () => {
     const dashboardBlocker = document.getElementById('dashboard_blur');
@@ -216,3 +280,4 @@ const showElement = (element) => {
         element.classList.remove('display_none');
     }
 }
+

@@ -7,7 +7,7 @@
     <body>
 
         <div class='row'>
-            <div class='col-sm-12 col-md-3'>
+            <div class='col-sm-12 col-md-4'>
 
                 <div class="card text-white bg-primary mb-4">
                     <div class="card-header">
@@ -46,7 +46,7 @@
                                 <button class='connecting_button' id='personal_code_chat_button'>
                                     <img src='./utils/images/chatButton.png' class='connecting_buttons_image'></img>
                                 </button>
-                                <button class='connecting_button' id='personal_code_video_button'>
+                                <button class='connecting_button display_none' id='personal_code_video_button'>
                                     <img src='./utils/images/videoButton.png' class='connecting_buttons_image'></img>
                                 </button>
                             </div>
@@ -57,14 +57,14 @@
                                 <button class='connecting_button' id='stranger_chat_button'>
                                     <img src='/utils/images/chatButton.png' class='connecting_buttons_image'></img>
                                 </button>
-                                <button class='connecting_button' id='stranger_video_button'>
+                                <button class='connecting_button display_none' id='stranger_video_button'>
                                     <img src='/utils/images/videoButton.png' class='connecting_buttons_image'></img>
                                 </button>
                             </div>
                         </div>
                         <div class='checkbox_container'>
                             <div class='checkbox_connection' id='allow_strangers_checkbox'>
-                                <img id='allow_strangers_checkbox_image' class='' src='./utils/images/check.png'></img>
+                                <img id='allow_strangers_checkbox_image' class='display_none' src='./utils/images/check.png'></img>
                             </div>
                             <p class='checkbox_container_paragraph'>Permite la conexión con desconocidos</p>
                         </div>
@@ -81,7 +81,7 @@
                  
 
             </div>
-            <div class='col-sm-12 col-md-3'>
+            <div class='col-sm-12 col-md-4'>
                 <div class='videos_container'>
                     <div id='video_placeholder' class='videos_placeholder'>
                         <img src='./utils/images/img-personal/logo-emg.png' width="140px"></img>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <div class='col-sm-12  col-md-3 messenger_container'>
+            <div class='col-sm-12  col-md-4 messenger_container'>
                 <div class='messages_container' id='messages_container'></div>
                 <div class='new_message_container display_none' id='new_message'>
                     <input class='new_message_input' id='new_message_input' type='text' placeholder="Type your message..."></input>
@@ -146,6 +146,7 @@
         <script src='./js/store.js' type='module'></script>
         <script src='./js/WebRTCHandler.js' type='module'></script>
         <script src="./js/recordingUtils.js" type="module"></script>
+        <script src="./js/strangerUtils.js" type="module"></script>
         <script src='./js/main.js' type='module'></script>
     </body>
 </html>
